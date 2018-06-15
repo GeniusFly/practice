@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.FY.dao.GtypeMapper">
+ 	<insert id="addGtype" parameterType="com.FY.entity.Gtype">
+ 		insert into gtype values(#{typeid},#{typename})
+ 	</insert>
+ 	
+ 	<select id="getGtypeList" resultType="gtype">
+ 		select * from gtype
+ 	</select>
+ 	
+ 	<update id="updateGtype" parameterType="com.FY.entity.Gtype">
+		update gtype set typeid=#{typeid},
+		typename=#{typename}
+		where typeid=#{typeid}
+	</update>
+	<delete id="deleteGtype" parameterType="int">
+ 		delete from gtype where typeid=#{typeid}
+ 	</delete>
+ 	
+</mapper>

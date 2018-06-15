@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.FY.dao.GinfoMapper">
+	<resultMap type="ginfo" id="ginfoMap">
+		<id property="id" column="id"></id>
+		<result property="name" column="name"/>
+		<result property="price" column="price"/>
+		<!-- <result property="gtype.typename" column="typename"/> -->
+		<result property="store" column="store"/>
+		<association property="gtype" javaType="gtype">
+			<id property="typeid" column="typeid"></id>
+			<result property="typename" column="typename"/>
+		</association>
+	</resultMap>
+
+	<insert id="addGinfo" parameterType="com.FY.entity.Ginfo">
+ 		insert into ginfo values(#{id},#{name},#{typeid},#{price},#{store})
+ 	</insert>
+ 	<select id="getGinfoList" resultMap="ginfoMap">
+ 		select i.id,
+ 			   i.name,
+ 			   i.price,
+ 			   t.typename,
+ 			   i.store 		
+ 		from ginfo i,
+ 			 gtype t
+ 		where t.typeid=i.typeid
+ 	</select>
+ 	<update id="updateGinfo" parameterType="com.FY.entity.Ginfo">
+		update ginfo set id=#{id},
+		name=#{name},
+		typeid=#{typeid},
+		price=#{price},
+		store=#{store}
+		where id=#{id}
+	</update>
+	<delete id="deleteGinfo" parameterType="int">
+ 		delete from ginfo where id=#{id}
+ 	</delete>
+</mapper>
